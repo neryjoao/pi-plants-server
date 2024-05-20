@@ -1,6 +1,6 @@
 import { Pot } from "./Pot";
 import { getPotData} from "../helpers/dataHelper"
-import { PlantDetailForUi } from "../types";
+import { PlantDetailShort } from "../types";
 
 export class PlantSystem {
     private pots: Pot[];
@@ -9,5 +9,5 @@ export class PlantSystem {
         this.pots = pots;
     };
 
-    getPlantsDetails = (): PlantDetailForUi[] => this.pots.map(pot => getPotData(pot))
+    getPlantsDetails = (): PlantDetailShort[] => this.pots.map(pot => getPotData(pot))
 }

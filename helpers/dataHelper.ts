@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { PlantDetail, PlantDetailForUi, PlantDetailShort } from '../types';
+import { PlantDetail, PlantDetailShort } from '../types';
 import { Pot } from '../components/Pot';
 
 export const getPlantDetails = (): PlantDetail[] => {
@@ -8,7 +8,7 @@ export const getPlantDetails = (): PlantDetail[] => {
     return JSON.parse(plantDetails);
 };
 
-export const getPotData = (pot: Pot): PlantDetailForUi => {
+export const getPotData = (pot: Pot): PlantDetailShort => {
     return {
         waterThreshold: pot.getWaterThreshold(),
 		wateringMode: pot.getWateringMode(),
