@@ -1,13 +1,19 @@
-export type plantDetail = {
+export type PlantDetail = PlantDetailShort & {
     pumpPin: number,
     moisturePin: number,
     frequency: number,
-    waterThreshold: string,
-    wateringMode: string,
+    index?: number
+};
+
+export type PlantDetailShort = {
+    waterThreshold: number,
+    wateringMode: WateringMode,
     name: string,
-    isOn: boolean,
-    index?: number,
-    five?: any
+    isOn: boolean
+};
+
+export type PlantDetailForUi = PlantDetailShort & {
+    moistureLevel?: number
 }
 
-// TODO fix five type
+export type WateringMode = "MANUAL" | "AUTOMATIC" | "SCHEDULED"

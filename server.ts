@@ -14,7 +14,6 @@ const board = new five.Board({port: "COM3"});
 const createPlantSystem = () => {
     const plantDetails = getPlantDetails();
     const pots = plantDetails.map((plant, index) => {
-        plant.five = five;
         plant.index = index;
         return new Pot(plant);
     });
@@ -26,7 +25,9 @@ const createPlantSystem = () => {
 
 board.on('ready', () => {
     createPlantSystem();
+
     const port = 3001;
+    
     app.listen(port, () => {
         console.log(`Listening on port ${port}`);
     });

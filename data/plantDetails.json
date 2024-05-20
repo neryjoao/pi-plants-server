@@ -3,7 +3,7 @@
 		"pumpPin": 2,
 		"moisturePin": 0,
 		"frequency": 2000,
-		"waterThreshold": "30",
+		"waterThreshold": 30,
 		"wateringMode": "manual",
 		"name": "My Plant1",
 		"isOn": false
@@ -12,7 +12,7 @@
 		"pumpPin": 3,
 		"moisturePin": 1,
 		"frequency": 2000,
-		"waterThreshold": "30",
+		"waterThreshold": 30,
 		"wateringMode": "manual",
 		"name": "My Plant2",
 		"isOn": false
@@ -21,7 +21,7 @@
 		"pumpPin": 4,
 		"moisturePin": 2,
 		"frequency": 2000,
-		"waterThreshold": "30",
+		"waterThreshold": 30,
 		"wateringMode": "manual",
 		"name": "My Plant3",
 		"isOn": false
@@ -30,7 +30,7 @@
 		"pumpPin": 5,
 		"moisturePin": 3,
 		"frequency": 2000,
-		"waterThreshold": "30",
+		"waterThreshold": 30,
 		"wateringMode": "manual",
 		"name": "My Plant4",
 		"isOn": false
@@ -39,7 +39,7 @@
 		"pumpPin": 6,
 		"moisturePin": 4,
 		"frequency": 2000,
-		"waterThreshold": "30",
+		"waterThreshold": 30,
 		"wateringMode": "manual",
 		"name": "My Plant5",
 		"isOn": false
@@ -48,7 +48,7 @@
 		"pumpPin": 7,
 		"moisturePin": 5,
 		"frequency": 2000,
-		"waterThreshold": "30",
+		"waterThreshold": 30,
 		"wateringMode": "manual",
 		"name": "My Plant6",
 		"isOn": false
@@ -57,7 +57,7 @@
 		"pumpPin": 8,
 		"moisturePin": 6,
 		"frequency": 2000,
-		"waterThreshold": "30",
+		"waterThreshold": 30,
 		"wateringMode": "manual",
 		"name": "My Plant7",
 		"isOn": false
@@ -66,7 +66,7 @@
 		"pumpPin": 9,
 		"moisturePin": 7,
 		"frequency": 2000,
-		"waterThreshold": "30",
+		"waterThreshold": 30,
 		"wateringMode": "manual",
 		"name": "My Plant8",
 		"isOn": true
