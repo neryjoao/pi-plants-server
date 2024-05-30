@@ -5,11 +5,12 @@ export type PlantDetail = PlantDetailShort & {
 };
 
 export type PlantDetailShort = {
+    id: string,
     waterThreshold: number,
     wateringMode: WateringMode,
     name: string,
     isOn: boolean,
-    moistureLevel?: number
+    moistureLevel: number,
 };
 
 export type WateringMode = "MANUAL" | "AUTOMATIC" | "SCHEDULED"

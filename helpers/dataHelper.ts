@@ -10,6 +10,7 @@ export const getPlantDetails = (): PlantDetail[] => {
 
 export const getPotData = (pot: Pot): PlantDetailShort => {
     return {
+        id: pot.getId(),
         waterThreshold: pot.getWaterThreshold(),
 		wateringMode: pot.getWateringMode(),
         moistureLevel: pot.getMoistureLevel(),

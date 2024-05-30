@@ -13,8 +13,7 @@ const board = new five.Board({port: "COM3"});
 
 const createPlantSystem = () => {
     const plantDetails = getPlantDetails();
-    const pots = plantDetails.map((plant, index) => {
-        plant.index = index;
+    const pots = plantDetails.map((plant) => {
         return new Pot(plant);
     });
 

@@ -1,7 +1,7 @@
 import { Sensor } from "johnny-five";
 
 export class MoistureSensor extends Sensor {
-    private moistureLevel?: number;
+    private moistureLevel: number;
 
     constructor(pin: number) {
         super({
@@ -9,9 +9,9 @@ export class MoistureSensor extends Sensor {
             freq: 2000
         });
 
-        let moisttureLevel;
+        this.moistureLevel = 0;
 
-        super.on(`data`, () => moisttureLevel = super.scaleTo(0, 100))
+        super.on(`data`, () => this.moistureLevel = super.scaleTo(0, 100))
     };
 
     getMoistureLevel = () => this.moistureLevel
