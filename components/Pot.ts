@@ -32,4 +32,6 @@ export class Pot {
     getIsOn = (): boolean => this.pump.getIsOn();
 
     getMoistureLevel = (): number => this.moistureSensor.getMoistureLevel();
+
+    setName = (updatedName: string) => this.name = updatedName;
 }

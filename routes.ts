@@ -2,6 +2,11 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { Request, Response, NextFunction, Express } from "express";
 
+import {PLANT_FIELDS} from './CONSTANTS';
+import {updateNameRecord} from './helpers/dataHelper';
+
+const {NAME, WATERING_MODE, THRESHOLD, IS_ON} = PLANT_FIELDS;
+
 import { PlantSystem } from "./components/PlantSystem";
 
 export const init = (app: Express, plantSystem: PlantSystem) => {
@@ -28,7 +33,26 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
             const data = plantSystem.getPlantsDetails();
             res.write(`data: ${JSON.stringify(data)}\n\n`);
         }, 5000)
-    })
+    });
+
+    //update: name, watering mode, water threshold
+    app.post(`/:plantId/name/:updatedName`, (req: Request, res: Response) => {
+        try {
+            const {plantId, updatedName} = req.params;
+            plantSystem.updateName(plantId, updatedName);
+            const plantDetails = updateNameRecord(plantId, updatedName);
+
+
+            res.json(plantDetails);
+        }
+        catch (error) {
+            res.status(500).send();
+        };
+    });
+
+    // POST update watering mode
+    // POST update waterThreshold
+    // POST turn on/off
     
 
 }
