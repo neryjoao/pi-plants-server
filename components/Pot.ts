@@ -34,4 +34,6 @@ export class Pot {
     getMoistureLevel = (): number => this.moistureSensor.getMoistureLevel();
 
     setName = (updatedName: string) => this.name = updatedName;
+
+    setWateringMode = (wateringMode: WateringMode) => this.wateringMode = wateringMode;
 }

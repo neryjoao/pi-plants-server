@@ -3,7 +3,8 @@ import bodyParser from "body-parser";
 import { Request, Response, NextFunction, Express } from "express";
 
 import {PLANT_FIELDS} from './CONSTANTS';
-import {updateNameRecord} from './helpers/dataHelper';
+import {updatePlantRecords} from './helpers/dataHelper';
+import {isValidWateringMode} from './middlewares';
 
 const {NAME, WATERING_MODE, THRESHOLD, IS_ON} = PLANT_FIELDS;
 
@@ -35,14 +36,15 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
         }, 5000)
     });
 
+
     //update: name, watering mode, water threshold
-    app.post(`/:plantId/name/:updatedName`, (req: Request, res: Response) => {
+    app.post(`/:plantId/name/:updatedName`, (req: Request, res: Response): void => {
         try {
             const {plantId, updatedName} = req.params;
             plantSystem.updateName(plantId, updatedName);
-            const plantDetails = updateNameRecord(plantId, updatedName);
 
-
+            const plantDetails = plantSystem.getPlantsDetails();
+            updatePlantRecords(plantDetails); 
             res.json(plantDetails);
         }
         catch (error) {
@@ -51,6 +53,21 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
     });
 
     // POST update watering mode
+    app.post(`/:plantId/wateringMode/:wateringMode`, isValidWateringMode, (req: Request, res: Response): void => {
+        try {
+            const {plantId, wateringMode} = req.params;
+            plantSystem.updateWateringMode(plantId, wateringMode);
+
+            const plantDetails = plantSystem.getPlantsDetails();
+            updatePlantRecords(plantDetails); 
+            res.json(plantDetails);
+
+        }
+        catch (error) {
+            res.status(500).send();
+        };
+    });
+
     // POST update waterThreshold
     // POST turn on/off
     

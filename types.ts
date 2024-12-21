@@ -1,3 +1,5 @@
+import { WATERING_MODES } from "./CONSTANTS";
+
 export type PlantDetail = PlantDetailShort & {
     pumpPin: number,
     moisturePin: number,
@@ -13,4 +15,4 @@ export type PlantDetailShort = {
     moistureLevel: number,
 };
 
-export type WateringMode = "MANUAL" | "AUTOMATIC" | "SCHEDULED"
+export type WateringMode = typeof WATERING_MODES[number];

@@ -8,4 +8,6 @@ export const PLANT_FIELDS = {
     THRESHOLD: `waterThreshold`,
     WATERING_MODE: `wateringMode`,
     IS_ON: `isOn`
-}
+};
+
+export const WATERING_MODES = ['automatic', 'manual', 'scheduled']

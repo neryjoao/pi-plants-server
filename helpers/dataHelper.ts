@@ -24,17 +24,19 @@ export const getPotData = (pot: Pot): PlantDetailShort => {
     }
 };
 
-export const updateNameRecord = (plantId: string, updatedName: string) => {
-    const plantDetails = getPlantDetails();
+export const updatePlantRecords = (plantDetails: PlantDetailShort[]): void => {
+    const currentPlantRecords = getPlantDetails();
 
-    const plant = plantDetails.find(plant => plant.id === plantId);
-    if (plant) {
-        plant.name = updatedName;
-        fs.writeFileSync(FILE_PATH, JSON.stringify(plantDetails));
-        
-        return plantDetails;
-    } else {
-        throw new Error(WRITING_ERROR);
-    }
+    const updatedRecords = currentPlantRecords.map(plant => {
+        const {pumpPin, moisturePin, frequency} = plant;
+        return {
+            ...plantDetails,
+            pumpPin,
+            moisturePin,
+            frequency
+        }
+    })
+
+    fs.writeFileSync(FILE_PATH, JSON.stringify(updatedRecords));
 };
 

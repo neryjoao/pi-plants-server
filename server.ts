@@ -6,12 +6,11 @@ import { PlantSystem } from './components/PlantSystem';
 import { getPlantDetails } from './helpers/dataHelper';
 import {init} from './routes'
 
-
 const app = express();
 
 const board = new five.Board({port: "COM3"});
 
-const createPlantSystem = () => {
+const createPlantSystem = (): void => {
     const plantDetails = getPlantDetails();
     const pots = plantDetails.map((plant) => {
         return new Pot(plant);
