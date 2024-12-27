@@ -10,7 +10,6 @@ export class Pump extends Relay {
     };
 
     getIsOn = (): boolean => {
-        console.log(this.isPumpOn);
         return this.isPumpOn;
     };
 
@@ -23,5 +22,4 @@ export class Pump extends Relay {
         super.toggle();
         this.setIsPumpOn(!this.isPumpOn);
     };
-    
 }
