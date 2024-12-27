@@ -55,4 +55,14 @@ export class PlantSystem {
             throw new Error(RESOURCE_NOT_FOUND);
         };
     };
+
+    setThreshold = (plantId: string, threshold: number) => {
+        const pot = this.findPot(plantId);
+
+        if (pot) {
+            pot.setWaterThreshold(threshold);           
+        } else {
+            throw new Error(RESOURCE_NOT_FOUND);
+        };
+    }
 }

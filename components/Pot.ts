@@ -44,4 +44,8 @@ export class Pot {
     setIsPumpOn = (isPumpOn: boolean) => {
         this.pump.setIsPumpOn(isPumpOn);
     };
+
+    setWaterThreshold = (threshold: number) => {
+        this.waterThreshold = threshold;
+    };
 }

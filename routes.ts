@@ -95,7 +95,14 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
 
 
     // POST update waterThreshold
+    app.post(`/:plantId/setThreshold/:threshold`, (req: Request, res: Response) => {
+        const {plantId, threshold} = req.params;
+        plantSystem.setThreshold(plantId, parseInt(threshold));
 
+        const plantDetails = plantSystem.getPlantsDetails();
+        updatePlantRecords(plantDetails); 
+        res.json(plantDetails);
+    });
 
     // todo add error handeler
     
