@@ -29,6 +29,7 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
         next();
     };
 
+    // GET stream of plant details
     app.get(`/plantDetails`, useServerSentEventsMiddleware, (req: Request, res: Response) => {
         setInterval(() => {
             const data = plantSystem.getPlantsDetails();
@@ -36,40 +37,67 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
         }, 5000)
     });
 
+    // static GET plant details
+    app.get(`/plantDetailsStatic`, (req: Request, res: Response) => {
+        const data = plantSystem.getPlantsDetails();
+        res.json(data);
+    });
+
 
     //update: name, watering mode, water threshold
     app.post(`/:plantId/name/:updatedName`, (req: Request, res: Response): void => {
-        try {
             const {plantId, updatedName} = req.params;
             plantSystem.updateName(plantId, updatedName);
 
             const plantDetails = plantSystem.getPlantsDetails();
             updatePlantRecords(plantDetails); 
             res.json(plantDetails);
-        }
-        catch (error) {
-            res.status(500).send();
-        };
     });
 
     // POST update watering mode
     app.post(`/:plantId/wateringMode/:wateringMode`, isValidWateringMode, (req: Request, res: Response): void => {
-        try {
-            const {plantId, wateringMode} = req.params;
-            plantSystem.updateWateringMode(plantId, wateringMode);
+        const {plantId, wateringMode} = req.params;
+        plantSystem.updateWateringMode(plantId, wateringMode);
 
-            const plantDetails = plantSystem.getPlantsDetails();
-            updatePlantRecords(plantDetails); 
-            res.json(plantDetails);
-
-        }
-        catch (error) {
-            res.status(500).send();
-        };
+        const plantDetails = plantSystem.getPlantsDetails();
+        updatePlantRecords(plantDetails); 
+        res.json(plantDetails);
     });
 
+
+    // POST pump toggle
+    app.post(`/:plantId/togglePump`, (req: Request, res: Response) => {
+        const {plantId} = req.params;
+        plantSystem.togglePump(plantId);
+
+        const plantDetails = plantSystem.getPlantsDetails();
+        updatePlantRecords(plantDetails); 
+        res.json(plantDetails);
+    });
+
+    app.post(`/:plantId/setPumpOn`, (req: Request, res: Response) => {
+        const {plantId} = req.params;
+        plantSystem.setPumpOn(plantId, true);
+
+        const plantDetails = plantSystem.getPlantsDetails();
+        updatePlantRecords(plantDetails); 
+        res.json(plantDetails);
+    });
+
+    app.post(`/:plantId/setPumpOff`, (req: Request, res: Response) => {
+        const {plantId} = req.params;
+        plantSystem.setPumpOn(plantId, false);
+
+        const plantDetails = plantSystem.getPlantsDetails();
+        updatePlantRecords(plantDetails); 
+        res.json(plantDetails);
+    });
+
+
     // POST update waterThreshold
-    // POST turn on/off
+
+
+    // todo add error handeler
     
 
 }

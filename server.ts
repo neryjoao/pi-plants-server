@@ -8,7 +8,8 @@ import {init} from './routes'
 
 const app = express();
 
-const board = new five.Board({port: "COM3"});
+// const board = new five.Board({port: "COM3"});
+const board = new five.Board();
 
 const createPlantSystem = (): void => {
     const plantDetails = getPlantDetails();
@@ -21,7 +22,7 @@ const createPlantSystem = (): void => {
     init(app, plantSystem);
 }
 
-board.on('ready', () => {
+board.on(`ready`, () => {
     createPlantSystem();
 
     const port = 3001;

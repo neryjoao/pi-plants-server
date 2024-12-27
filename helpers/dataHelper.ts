@@ -27,10 +27,10 @@ export const getPotData = (pot: Pot): PlantDetailShort => {
 export const updatePlantRecords = (plantDetails: PlantDetailShort[]): void => {
     const currentPlantRecords = getPlantDetails();
 
-    const updatedRecords = currentPlantRecords.map(plant => {
+    const updatedRecords = currentPlantRecords.map((plant, index) => {
         const {pumpPin, moisturePin, frequency} = plant;
         return {
-            ...plantDetails,
+            ...plantDetails[index],
             pumpPin,
             moisturePin,
             frequency

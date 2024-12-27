@@ -36,4 +36,12 @@ export class Pot {
     setName = (updatedName: string) => this.name = updatedName;
 
     setWateringMode = (wateringMode: WateringMode) => this.wateringMode = wateringMode;
+
+    togglePump = () => {
+        this.pump.togglePump();
+    };
+
+    setIsPumpOn = (isPumpOn: boolean) => {
+        this.pump.setIsPumpOn(isPumpOn);
+    };
 }

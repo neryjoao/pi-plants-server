@@ -14,7 +14,7 @@ export class PlantSystem {
 
     getPlantsDetails = (): PlantDetailShort[] => this.pots.map(pot => getPotData(pot));
 
-    private findPot = (plantId: String) => this.pots.find(pot => pot.getId() === plantId)
+    private findPot = (plantId: String): Pot | undefined => this.pots.find(pot => pot.getId() === plantId)
 
     updateName = (plantId: string, updatedName: string) => {
         const pot = this.findPot(plantId);
@@ -34,5 +34,25 @@ export class PlantSystem {
         } else {
             throw new Error(RESOURCE_NOT_FOUND);
         }
+    };
+
+    togglePump = (plantId: string) => {
+        const pot = this.findPot(plantId);
+
+        if (pot) {
+            pot.togglePump();           
+        } else {
+            throw new Error(RESOURCE_NOT_FOUND);
+        };
+    };
+
+    setPumpOn = (plantId: string, isPumpOn: boolean) => {
+        const pot = this.findPot(plantId);
+
+        if (pot) {
+            pot.setIsPumpOn(isPumpOn);           
+        } else {
+            throw new Error(RESOURCE_NOT_FOUND);
+        };
     };
 }
