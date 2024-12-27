@@ -19,6 +19,12 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
         res.send(`pong`)
     });
 
+    const updateAndGetPlants = () => {
+        const plantDetails = plantSystem.getPlantsDetails();
+        updatePlantRecords(plantDetails);
+        return plantDetails;
+    };
+
     // To create server sent event:
     const useServerSentEventsMiddleware = (req: Request, res: Response, next: NextFunction) => {
         res.setHeader('Content-Type', 'text/event-stream');
@@ -49,9 +55,7 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
             const {plantId, updatedName} = req.params;
             plantSystem.updateName(plantId, updatedName);
 
-            const plantDetails = plantSystem.getPlantsDetails();
-            updatePlantRecords(plantDetails); 
-            res.json(plantDetails);
+            res.json(updateAndGetPlants());
     });
 
     // POST update watering mode
@@ -59,9 +63,7 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
         const {plantId, wateringMode} = req.params;
         plantSystem.updateWateringMode(plantId, wateringMode);
 
-        const plantDetails = plantSystem.getPlantsDetails();
-        updatePlantRecords(plantDetails); 
-        res.json(plantDetails);
+        res.json(updateAndGetPlants());
     });
 
 
@@ -70,27 +72,21 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
         const {plantId} = req.params;
         plantSystem.togglePump(plantId);
 
-        const plantDetails = plantSystem.getPlantsDetails();
-        updatePlantRecords(plantDetails); 
-        res.json(plantDetails);
+        res.json(updateAndGetPlants());
     });
 
     app.post(`/:plantId/setPumpOn`, (req: Request, res: Response) => {
         const {plantId} = req.params;
         plantSystem.setPumpOn(plantId, true);
 
-        const plantDetails = plantSystem.getPlantsDetails();
-        updatePlantRecords(plantDetails); 
-        res.json(plantDetails);
+        res.json(updateAndGetPlants());
     });
 
     app.post(`/:plantId/setPumpOff`, (req: Request, res: Response) => {
         const {plantId} = req.params;
         plantSystem.setPumpOn(plantId, false);
 
-        const plantDetails = plantSystem.getPlantsDetails();
-        updatePlantRecords(plantDetails); 
-        res.json(plantDetails);
+        res.json(updateAndGetPlants());
     });
 
 
@@ -99,9 +95,7 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
         const {plantId, threshold} = req.params;
         plantSystem.setThreshold(plantId, parseInt(threshold));
 
-        const plantDetails = plantSystem.getPlantsDetails();
-        updatePlantRecords(plantDetails); 
-        res.json(plantDetails);
+        res.json(updateAndGetPlants());
     });
 
     // todo add error handeler
