@@ -1,0 +1,159 @@
+openapi: "3.1.0"
+info:
+  title: "Pi Plants server"
+  version: "1.0.0"
+  description: "This is the API documentation for the Pi Plants server."
+servers:
+  - url: "http://plants:3001/"
+    description: "Local server"
+tags:
+  - name: "Plants"
+    description: "Operations about plants"
+  - name: "Sensors"
+    description: "Operations about sensors"
+  - name: "Watering"
+    description: "Operations about watering"
+paths:
+  /ping:
+    get:
+      summary: "Ping the server"
+      tags:
+        - "General"
+      responses:
+        '200':
+          description: "pong"
+  /plantDetails:
+    get:
+      summary: "Get stream of plant details"
+      tags:
+        - "Plants"
+      responses:
+        '200':
+          description: "Stream of plant details"
+  /plantDetailsStatic:
+    get:
+      summary: "Get static plant details"
+      tags:
+        - "Plants"
+      responses:
+        '200':
+          description: "Static plant details"
+  /{plantId}/name/{updatedName}:
+    post:
+      summary: "Update plant name"
+      tags:
+        - "Plants"
+      parameters:
+        - name: "plantId"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "updatedName"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: "Updated plant details"
+  /{plantId}/wateringMode/{wateringMode}:
+    post:
+      summary: "Update watering mode"
+      tags:
+        - "Watering"
+      parameters:
+        - name: "plantId"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "wateringMode"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: "Updated plant details"
+  /{plantId}/togglePump:
+    post:
+      summary: "Toggle pump"
+      tags:
+        - "Watering"
+      parameters:
+        - name: "plantId"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: "Updated plant details"
+  /{plantId}/setPumpOn:
+    post:
+      summary: "Set pump on"
+      tags:
+        - "Watering"
+      parameters:
+        - name: "plantId"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: "Updated plant details"
+  /{plantId}/setPumpOff:
+    post:
+      summary: "Set pump off"
+      tags:
+        - "Watering"
+      parameters:
+        - name: "plantId"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: "Updated plant details"
+  /{plantId}/setThreshold/{threshold}:
+    post:
+      summary: "Set water threshold"
+      tags:
+        - "Plants"
+      parameters:
+        - name: "plantId"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "threshold"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        '200':
+          description: "Updated plant details"
+  /{plantId}/setWateringSchedule:
+    post:
+      summary: "Set watering schedule"
+      tags:
+        - "Watering"
+      parameters:
+        - name: "plantId"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+      responses:
+        '200':
+          description: "Updated plant details"

@@ -6,14 +6,18 @@ import {PLANT_FIELDS} from './CONSTANTS';
 import {updatePlantRecords} from './helpers/dataHelper';
 import {isValidWateringMode} from './middlewares';
 
+import { initDocs } from "./docs";
+
 const {NAME, WATERING_MODE, THRESHOLD, IS_ON} = PLANT_FIELDS;
 
 import { PlantSystem } from "./components/PlantSystem";
 
-export const init = (app: Express, plantSystem: PlantSystem) => {
+export const init = async (app: Express, plantSystem: PlantSystem) => {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(cors<Request>());
+
+    await initDocs(app);
 
     app.get('/ping', (_req: Request, res: Response) => {
         res.send(`pong`)
