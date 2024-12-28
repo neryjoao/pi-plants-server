@@ -1,6 +1,6 @@
 import { Pot } from "./Pot";
 import { getPotData} from "../helpers/dataHelper"
-import { PlantDetailShort, WateringMode } from "../types";
+import { PlantDetailShort, WateringMode, WateringSchedule } from "../types";
 import {ERRORS} from "../CONSTANTS"
 
 const {RESOURCE_NOT_FOUND} = ERRORS;
@@ -61,6 +61,16 @@ export class PlantSystem {
 
         if (pot) {
             pot.setWaterThreshold(threshold);           
+        } else {
+            throw new Error(RESOURCE_NOT_FOUND);
+        };
+    };
+
+    setWateringSchedule = (plantId: string, wateringSchedule: WateringSchedule) => {
+        const pot = this.findPot(plantId);
+
+        if (pot) {
+            pot.setWateringSchedule(wateringSchedule);           
         } else {
             throw new Error(RESOURCE_NOT_FOUND);
         };

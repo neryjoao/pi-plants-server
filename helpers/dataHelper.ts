@@ -20,7 +20,8 @@ export const getPotData = (pot: Pot): PlantDetailShort => {
 		wateringMode: pot.getWateringMode(),
         moistureLevel: pot.getMoistureLevel(),
 		name: pot.getName(),
-		isOn: pot.getIsOn()
+		isOn: pot.getIsOn(),
+        wateringSchedule: pot.getWateringSchedule()
     }
 };
 

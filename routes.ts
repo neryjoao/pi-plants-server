@@ -61,6 +61,7 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
     // POST update watering mode
     app.post(`/:plantId/wateringMode/:wateringMode`, isValidWateringMode, (req: Request, res: Response): void => {
         const {plantId, wateringMode} = req.params;
+        // validate wateringMode
         plantSystem.updateWateringMode(plantId, wateringMode);
 
         res.json(updateAndGetPlants());
@@ -94,6 +95,16 @@ export const init = (app: Express, plantSystem: PlantSystem) => {
     app.post(`/:plantId/setThreshold/:threshold`, (req: Request, res: Response) => {
         const {plantId, threshold} = req.params;
         plantSystem.setThreshold(plantId, parseInt(threshold));
+
+        res.json(updateAndGetPlants());
+    });
+
+    // POST update watering schedule
+    app.post(`/:plantId/setWateringSchedule`, (req: Request, res: Response) => {
+        const {plantId} = req.params;
+        const wateringSchedule = req.body;
+
+        plantSystem.setWateringSchedule(plantId, wateringSchedule);
 
         res.json(updateAndGetPlants());
     });

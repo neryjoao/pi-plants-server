@@ -13,6 +13,23 @@ export type PlantDetailShort = {
     name: string,
     isOn: boolean,
     moistureLevel: number,
+    wateringSchedule?: WateringSchedule
 };
+
+export type WateringSchedule = {
+    constantPeriodicWatering: boolean,
+    repetitionPerDay?: number,	// if constantPeriodicWatering is true
+    timeWateringInSec?: number	// if constantPeriodicWatering is true
+    customSchedule?: CustomSchedule[] // if constantPeriodicWatering is false
+};
+
+type CustomSchedule = {
+    everyDay: boolean,
+    dayOfTheWeek?: DayOfTheWeek,
+    timeOfTheDay: string,
+    timeWateringInSec: number
+};
+
+type DayOfTheWeek = `MONDAY` | `TUESDAY` | `WEDNESDAY` | `THURSDAY` | `FRIDAY` | `SATURDAY` | `SUNDAY`;
 
 export type WateringMode = typeof WATERING_MODES[number];
