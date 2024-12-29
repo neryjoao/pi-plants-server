@@ -1,10 +1,10 @@
 import express from 'express';
 import * as five from 'johnny-five';
 
-import { Pot } from './components/Pot';
-import { PlantSystem } from './components/PlantSystem';
-import { getPlantDetails } from './helpers/dataHelper';
-import {init} from './routes'
+import { Pot } from './src/components/Pot';
+import { PlantSystem } from './src/components/PlantSystem';
+import { getPlantDetails } from './src/helpers/dataHelper';
+import {init} from './src/routes'
 
 const app = express();
 

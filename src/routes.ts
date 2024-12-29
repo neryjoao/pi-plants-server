@@ -5,7 +5,7 @@ import { Request, Response, NextFunction, Express } from "express";
 import {PLANT_FIELDS} from './CONSTANTS';
 import {updatePlantRecords} from './helpers/dataHelper';
 import {isValidWateringMode} from './middlewares';
-import { wateringScheduleSchema } from "./doc/validations";
+import { wateringScheduleSchema } from "../doc/validations";
 
 import { initDocs } from "./docs";
 

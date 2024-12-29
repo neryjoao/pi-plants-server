@@ -1,12 +1,12 @@
 import fs from 'fs';
-import { PlantDetail, PlantDetailShort } from '../types';
+import { PlantDetail, PlantDetailShort } from '../../types';
 import { Pot } from '../components/Pot';
 
 import { ERRORS } from '../CONSTANTS';
 
 const {WRITING_ERROR} = ERRORS;
 
-const FILE_PATH = `./data/plantDetails.json`
+const FILE_PATH = `./src/data/plantDetails.json`
 
 export const getPlantDetails = (): PlantDetail[] => {
     const plantDetails = fs.readFileSync(FILE_PATH,  'utf8');

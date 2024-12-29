@@ -1,6 +1,6 @@
 import { Pot } from "./Pot";
 import { getPotData} from "../helpers/dataHelper"
-import { PlantDetailShort, WateringMode, WateringSchedule } from "../types";
+import { PlantDetailShort, WateringMode, WateringSchedule } from "../../types";
 import {ERRORS} from "../CONSTANTS"
 
 const {RESOURCE_NOT_FOUND} = ERRORS;

@@ -1,4 +1,4 @@
-import { PlantDetail, WateringMode, WateringSchedule } from "../types";
+import { PlantDetail, WateringMode, WateringSchedule } from "../../types";
 import { MoistureSensor } from "./MoistureSensor";
 
 import {Pump} from './Pump'

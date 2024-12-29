@@ -1,4 +1,4 @@
-import { WATERING_MODES } from "./CONSTANTS";
+import { WATERING_MODES } from "./src/CONSTANTS";
 
 export type PlantDetail = PlantDetailShort & {
     pumpPin: number,
