@@ -1,1 +1,95 @@
-[{"id":"plant1","waterThreshold":60,"wateringMode":"manual","moistureLevel":61,"name":"My Plant1","isOn":true,"wateringSchedule":{"constantPeriodicWatering":true,"repetitionPerDay":5,"timeWateringInSec":10},"pumpPin":2,"moisturePin":0,"frequency":2000},{"id":"plant2","waterThreshold":30,"wateringMode":"manual","moistureLevel":17,"name":"My Plant2","isOn":false,"pumpPin":3,"moisturePin":1,"frequency":2000},{"id":"plant3","waterThreshold":30,"wateringMode":"manual","moistureLevel":60,"name":"My Plant3","isOn":false,"pumpPin":4,"moisturePin":2,"frequency":2000},{"id":"plant4","waterThreshold":30,"wateringMode":"manual","moistureLevel":62,"name":"My Plant4","isOn":false,"pumpPin":5,"moisturePin":3,"frequency":2000},{"id":"plant5","waterThreshold":30,"wateringMode":"manual","moistureLevel":73,"name":"My Plant5","isOn":false,"pumpPin":6,"moisturePin":4,"frequency":2000},{"id":"plant6","waterThreshold":30,"wateringMode":"manual","moistureLevel":63,"name":"My Plant6","isOn":false,"pumpPin":7,"moisturePin":5,"frequency":2000},{"id":"plant7","waterThreshold":30,"wateringMode":"manual","moistureLevel":63,"name":"My Plant7","isOn":false,"pumpPin":8,"moisturePin":6,"frequency":2000},{"id":"plant8","waterThreshold":30,"wateringMode":"manual","moistureLevel":62,"name":"My Plant8","isOn":true,"pumpPin":9,"moisturePin":7,"frequency":2000}]
+[
+    {
+        "id": "plant1",
+        "waterThreshold": 60,
+        "wateringMode": "MANUAL",
+        "moistureLevel": 62,
+        "name": "My Plant1",
+        "isOn": true,
+        "wateringSchedule": {
+            "constantPeriodicWatering": true,
+            "repetitionPerDay": 4,
+            "timeWateringInSec": 10
+        },
+        "pumpPin": 2,
+        "moisturePin": 0,
+        "frequency": 2000
+    },
+    {
+        "id": "plant2",
+        "waterThreshold": 30,
+        "wateringMode": "MANUAL",
+        "moistureLevel": 21,
+        "name": "My Plant2",
+        "isOn": false,
+        "pumpPin": 3,
+        "moisturePin": 1,
+        "frequency": 2000
+    },
+    {
+        "id": "plant3",
+        "waterThreshold": 30,
+        "wateringMode": "MANUAL",
+        "moistureLevel": 52,
+        "name": "My Plant3",
+        "isOn": false,
+        "pumpPin": 4,
+        "moisturePin": 2,
+        "frequency": 2000
+    },
+    {
+        "id": "plant4",
+        "waterThreshold": 30,
+        "wateringMode": "MANUAL",
+        "moistureLevel": 61,
+        "name": "My Plant4",
+        "isOn": false,
+        "pumpPin": 5,
+        "moisturePin": 3,
+        "frequency": 2000
+    },
+    {
+        "id": "plant5",
+        "waterThreshold": 30,
+        "wateringMode": "MANUAL",
+        "moistureLevel": 62,
+        "name": "My Plant5",
+        "isOn": false,
+        "pumpPin": 6,
+        "moisturePin": 4,
+        "frequency": 2000
+    },
+    {
+        "id": "plant6",
+        "waterThreshold": 30,
+        "wateringMode": "MANUAL",
+        "moistureLevel": 62,
+        "name": "My Plant6",
+        "isOn": false,
+        "pumpPin": 7,
+        "moisturePin": 5,
+        "frequency": 2000
+    },
+    {
+        "id": "plant7",
+        "waterThreshold": 30,
+        "wateringMode": "MANUAL",
+        "moistureLevel": 63,
+        "name": "My Plant7",
+        "isOn": false,
+        "pumpPin": 8,
+        "moisturePin": 6,
+        "frequency": 2000
+    },
+    {
+        "id": "plant8",
+        "waterThreshold": 30,
+        "wateringMode": "MANUAL",
+        "moistureLevel": 62,
+        "name": "My Plant8",
+        "isOn": true,
+        "pumpPin": 9,
+        "moisturePin": 7,
+        "frequency": 2000
+    }
+]

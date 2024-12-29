@@ -5,6 +5,7 @@ import { Request, Response, NextFunction, Express } from "express";
 import {PLANT_FIELDS} from './CONSTANTS';
 import {updatePlantRecords} from './helpers/dataHelper';
 import {isValidWateringMode} from './middlewares';
+import { wateringScheduleSchema } from "./doc/validations";
 
 import { initDocs } from "./docs";
 
@@ -106,7 +107,7 @@ export const init = async (app: Express, plantSystem: PlantSystem) => {
     // POST update watering schedule
     app.post(`/:plantId/setWateringSchedule`, (req: Request, res: Response) => {
         const {plantId} = req.params;
-        const wateringSchedule = req.body;
+        const wateringSchedule = wateringScheduleSchema.parse(req.body);
 
         plantSystem.setWateringSchedule(plantId, wateringSchedule);
 

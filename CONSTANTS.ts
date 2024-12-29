@@ -10,4 +10,4 @@ export const PLANT_FIELDS = {
     IS_ON: `isOn`
 };
 
-export const WATERING_MODES = ['automatic', 'manual', 'scheduled']
+export const WATERING_MODES = ['AUTOMATIC', 'MANUAL', 'SCHEDULED']
