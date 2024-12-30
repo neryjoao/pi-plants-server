@@ -1,4 +1,5 @@
 import { PlantDetail, WateringMode, WateringSchedule } from "../../types";
+import { WATERING_MODES } from '../CONSTANTS';
 import { MoistureSensor } from "./MoistureSensor";
 
 import {Pump} from './Pump'
@@ -21,6 +22,13 @@ export class Pot {
         this.name = name;
         this.waterThreshold = waterThreshold;
         this.wateringSchedule = wateringSchedule;
+
+        this.moistureSensor.on(`data`, (data) => {
+            // todo refine later the scale to
+            const scaledData = this.moistureSensor.scaleTo(0, 100);
+            console.log(`Scaled Data ${scaledData} from pot ${this.id}`);
+            this.waterPlant(scaledData);
+        });
     };
 
     getId = (): string => this.id;
@@ -54,4 +62,27 @@ export class Pot {
     setWaterThreshold = (threshold: number) => {
         this.waterThreshold = threshold;
     };
+
+    waterPlant = (moistureLevel: number) => {
+        switch(this.wateringMode) {
+            case WATERING_MODES[0]:
+                this.automaticWatering(moistureLevel);
+                break;
+            case WATERING_MODES[1]:
+                // do nothing
+                break;
+            case WATERING_MODES[1]:
+                // todo
+            default:
+                console.log(`Invalid watering mode ${this.wateringMode}`);
+        }
+    }
+
+    automaticWatering = (moistureLevel: number) => {
+        if (moistureLevel < this.waterThreshold) {
+            this.pump.setIsPumpOn(true);
+        } else {
+            this.pump.setIsPumpOn(false);
+        }
+    }
 }

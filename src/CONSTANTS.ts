@@ -10,4 +10,5 @@ export const PLANT_FIELDS = {
     IS_ON: `isOn`
 };
 
+// todo make this an object
 export const WATERING_MODES = ['AUTOMATIC', 'MANUAL', 'SCHEDULED']
