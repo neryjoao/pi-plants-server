@@ -2,6 +2,10 @@ import { WATERING_MODES } from "./CONSTANTS";
 import { Request, Response, NextFunction } from "express";
 
 
-export const isValidWateringMode = (req: Request, res: Response, _next: NextFunction) => {
-    return WATERING_MODES.indexOf(req.params.wateringMode) !== -1;
-} 
+export const isValidWateringMode = (req: Request, _res: Response, next: NextFunction) => {
+    if (!!WATERING_MODES[req.params.wateringMode]) {
+        next();
+    } else {
+        throw new Error(`Invalid Watering mode`) // todo fix error handeling, to avoid having it spread everywhere
+    }
+};

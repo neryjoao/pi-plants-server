@@ -1,4 +1,4 @@
-import { WATERING_MODES } from "./src/CONSTANTS";
+import { WATERING_MODES, DAYS_OF_THE_WEEK } from "./src/CONSTANTS";
 
 export type PlantDetail = PlantDetailShort & {
     pumpPin: number,
@@ -13,23 +13,23 @@ export type PlantDetailShort = {
     name: string,
     isOn: boolean,
     moistureLevel: number,
-    wateringSchedule?: WateringSchedule
+    wateringSchedule: WateringSchedule
 };
 
 export type WateringSchedule = {
-    constantPeriodicWatering: boolean,
-    repetitionPerDay?: number,	// if constantPeriodicWatering is true
-    timeWateringInSec?: number	// if constantPeriodicWatering is true
-    customSchedule?: CustomSchedule[] // if constantPeriodicWatering is false
+    regularWatering: boolean,
+    repetitionPerDay?: number,	// if regularWatering is true
+    timeWateringInSec?: number	// if regularWatering is true
+    customSchedule: CustomSchedule[] // if regularWatering is false
 };
 
-type CustomSchedule = {
+export type CustomSchedule = {
     everyDay: boolean,
     dayOfTheWeek?: DayOfTheWeek,
     timeOfTheDay: string,
     timeWateringInSec: number
 };
 
-type DayOfTheWeek = `MONDAY` | `TUESDAY` | `WEDNESDAY` | `THURSDAY` | `FRIDAY` | `SATURDAY` | `SUNDAY`;
+type DayOfTheWeek = typeof DAYS_OF_THE_WEEK[number];
 
 export type WateringMode = typeof WATERING_MODES[number];

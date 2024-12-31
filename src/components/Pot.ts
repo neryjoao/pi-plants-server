@@ -1,6 +1,7 @@
-import { PlantDetail, WateringMode, WateringSchedule } from "../../types";
+import { PlantDetail, WateringMode, WateringSchedule, CustomSchedule } from "../../types";
 import { WATERING_MODES } from '../CONSTANTS';
 import { MoistureSensor } from "./MoistureSensor";
+import {DateTime, Interval} from 'luxon';
 
 import {Pump} from './Pump'
 
@@ -11,7 +12,7 @@ export class Pot {
     private name: string;
     private waterThreshold: number;
     private id: string;
-    private wateringSchedule?: WateringSchedule;
+    private wateringSchedule: WateringSchedule;
     
     constructor({id, moisturePin, pumpPin, wateringMode, name, waterThreshold, isOn, wateringSchedule}: PlantDetail) {
         this.pump = new Pump(pumpPin, isOn);
@@ -65,14 +66,14 @@ export class Pot {
 
     waterPlant = (moistureLevel: number) => {
         switch(this.wateringMode) {
-            case WATERING_MODES[0]:
+            case WATERING_MODES.AUTOMATIC:
                 this.automaticWatering(moistureLevel);
                 break;
-            case WATERING_MODES[1]:
+            case WATERING_MODES.MANUAL:
                 // do nothing
                 break;
-            case WATERING_MODES[1]:
-                // todo
+            case WATERING_MODES.SCHEDULED:
+                this.scheduledWatering();
             default:
                 console.log(`Invalid watering mode ${this.wateringMode}`);
         }
@@ -84,5 +85,78 @@ export class Pot {
         } else {
             this.pump.setIsPumpOn(false);
         }
+    };
+
+    scheduledWatering = () => {
+        const {regularWatering } = this.wateringSchedule;
+
+        let shouldWater: boolean = false; // If I find a custom schedule where should be watering. If non is found, turn off pump
+
+        if (regularWatering) {
+            shouldWater = this.shouldWaterPlantsWithRegularWatering();
+        } else {
+            shouldWater = this.shouldWaterPlantsWithCustomWatering();
+        }
+
+        this.pump.setIsPumpOn(shouldWater);
+    };
+
+    shouldWaterPlantsWithRegularWatering = (): boolean => {
+        const {repetitionPerDay, timeWateringInSec}  = this.wateringSchedule!;
+
+        if (!repetitionPerDay || ! timeWateringInSec) {
+            return false;
+        };
+
+        const now = DateTime.now();
+
+        for(let i = 0; i < repetitionPerDay; i++) {
+            const unformattedStartTime = i * 24 / repetitionPerDay;
+            const hours = Math.floor(unformattedStartTime);
+            const minutes = Math.floor((unformattedStartTime - hours) * 60);
+
+            if (this.isWithinInterval(hours, minutes, timeWateringInSec, now)) {
+                return true;
+            }
+        }        
+
+        return false;
+    };
+
+    shouldWaterPlantsWithCustomWatering = (): boolean => {
+        const {customSchedule}  = this.wateringSchedule!;
+        const now = DateTime.now();
+        const currentWeekday = now.weekdayLong.toUpperCase()
+
+        customSchedule.forEach(watering => {
+            const {everyDay, dayOfTheWeek, timeOfTheDay, timeWateringInSec} = watering;
+
+            // todo quite ugly solution, check if its possible to do something with luxon
+            const splitTime = timeOfTheDay.split(`:`);
+            const hours = parseInt(splitTime[0]);
+            const minutes = parseInt(splitTime[1]);
+
+            const sameWeekDay = everyDay || currentWeekday === dayOfTheWeek?.toUpperCase();
+        
+            if (sameWeekDay) {
+                if (this.isWithinInterval(hours, minutes, timeWateringInSec, now)) {
+                    return true;
+                }
+            } 
+        });
+
+        return false;
+    };
+
+    isWithinInterval = (startHour: number, startMinute: number, duration: number, reference: DateTime): boolean => {
+        const start = DateTime.now().set({hour: startHour, minute: startMinute, second: 0});
+        const end = start.plus({seconds: duration});
+        
+        const interval = Interval.fromDateTimes(start, end);
+
+        if (interval.contains(reference)) {
+            return true;
+        }
+        return false
     }
-}
+};
