@@ -44,7 +44,7 @@ export class Pot {
 
     getMoistureLevel = (): number => this.moistureSensor.getMoistureLevel();
 
-    getWateringSchedule = (): WateringSchedule | undefined => this.wateringSchedule;
+    getWateringSchedule = (): WateringSchedule => this.wateringSchedule;
 
     setName = (updatedName: string) => this.name = updatedName;
 
