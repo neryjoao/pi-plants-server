@@ -1,7 +1,6 @@
 import {z} from 'zod';
 import { DAYS_OF_THE_WEEK } from './CONSTANTS';
 
-// todo consider using superRefine to make sure the optionals only show up conditionaly
 export const wateringScheduleSchema = z.object({
         regularWatering: z.boolean(),
         repetitionPerDay: z.number().optional(),
