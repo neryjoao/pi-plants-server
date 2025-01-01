@@ -74,6 +74,7 @@ export class Pot {
                 break;
             case WATERING_MODES.SCHEDULED:
                 this.scheduledWatering();
+                break;
             default:
                 console.log(`Invalid watering mode ${this.wateringMode}`);
         }
@@ -110,7 +111,7 @@ export class Pot {
 
         const now = DateTime.now();
 
-        for(let i = 0; i < repetitionPerDay; i++) {
+        for (let i = 0; i < repetitionPerDay; i++) {
             const unformattedStartTime = i * 24 / repetitionPerDay;
             const hours = Math.floor(unformattedStartTime);
             const minutes = Math.floor((unformattedStartTime - hours) * 60);
@@ -126,9 +127,10 @@ export class Pot {
     shouldWaterPlantsWithCustomWatering = (): boolean => {
         const {customSchedule}  = this.wateringSchedule!;
         const now = DateTime.now();
-        const currentWeekday = now.weekdayLong.toUpperCase()
+        const currentWeekday = now.weekdayLong.toUpperCase();
+        let shouldWater = false; 
 
-        customSchedule.forEach(watering => {
+        for(let watering of customSchedule) {
             const {everyDay, dayOfTheWeek, timeOfTheDay, timeWateringInSec} = watering;
 
             // todo quite ugly solution, check if its possible to do something with luxon
@@ -140,12 +142,13 @@ export class Pot {
         
             if (sameWeekDay) {
                 if (this.isWithinInterval(hours, minutes, timeWateringInSec, now)) {
-                    return true;
+                    shouldWater = true;
+                    break;
                 }
             } 
-        });
+        };
 
-        return false;
+        return shouldWater;
     };
 
     isWithinInterval = (startHour: number, startMinute: number, duration: number, reference: DateTime): boolean => {

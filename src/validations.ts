@@ -8,7 +8,7 @@ export const wateringScheduleSchema = z.object({
         customSchedule: z.array(z.object({
             everyDay: z.boolean(),
             dayOfTheWeek: z.enum(DAYS_OF_THE_WEEK).optional(),
-            timeOfTheDay: z.string().time(),
+            timeOfTheDay: z.string().regex(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format'),
             timeWateringInSec: z.number()}))  
 }).superRefine((arg, ctx) => {
     const {regularWatering, repetitionPerDay, timeWateringInSec, customSchedule} = arg;
@@ -25,6 +25,6 @@ export const wateringScheduleSchema = z.object({
                 code: z.ZodIssueCode.custom,
                 message: `If it is not watering every day, then it is necessary a week day`
             })
-        }
+        };
     });
 });
